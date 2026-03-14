@@ -1,0 +1,11 @@
+// Desktop-specific styles
+
+// Wider content area on large screens
+.wrap {
+  max-width: 1200px;
+}
+
+// Header spacing
+.d-header .contents {
+  padding: 0.25em 0;
+}

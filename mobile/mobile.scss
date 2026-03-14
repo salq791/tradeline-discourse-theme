@@ -1,0 +1,11 @@
+// Mobile-specific styles
+
+// Tighter spacing on mobile
+.topic-list .topic-list-item {
+  padding: 10px 8px;
+}
+
+// Full-width buttons on mobile
+.btn-primary {
+  border-radius: 9999px !important;
+}

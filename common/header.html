@@ -1,0 +1,17 @@
+<script type="text/discourse-plugin" version="0.8">
+  // Add "Back to Tradeline" link in header
+  api.decorateWidget("header-buttons:before", (helper) => {
+    return helper.h(
+      "a.btn.btn-default.btn-small.btn-icon-text",
+      {
+        attributes: {
+          href: "https://tradelineconsulting.com/portal",
+          title: "Back to Tradeline Portal",
+        },
+      },
+      [
+        helper.h("span.d-button-label", "Portal"),
+      ]
+    );
+  });
+</script>
