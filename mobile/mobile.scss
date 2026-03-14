@@ -1,11 +1,24 @@
-// Mobile-specific styles
-
-// Tighter spacing on mobile
-.topic-list .topic-list-item {
-  padding: 10px 8px;
+.d-header .contents {
+  min-height: 3.75rem;
 }
 
-// Full-width buttons on mobile
-.btn-primary {
-  border-radius: 9999px !important;
+.tradeline-header-shell {
+  margin-left: 0.5rem;
+}
+
+.tradeline-header-shell__actions {
+  gap: 0.25rem;
+}
+
+.tradeline-header-shell__action {
+  padding: 0.6rem 0.7rem;
+}
+
+.topic-list .topic-list-item,
+.latest-topic-list-item {
+  padding: 0.85rem 0;
+}
+
+.tradeline-footer {
+  margin-top: 3rem;
 }

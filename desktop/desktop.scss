@@ -1,11 +1,16 @@
-// Desktop-specific styles
-
-// Wider content area on large screens
-.wrap {
-  max-width: 1200px;
+.d-header .contents {
+  padding: 0.35rem 0;
 }
 
-// Header spacing
-.d-header .contents {
-  padding: 0.25em 0;
+.topic-area {
+  max-width: 920px;
+}
+
+.list-container,
+.categories-list,
+.category-list,
+.groups-boxes,
+.user-main,
+.search-container .search-advanced {
+  border-radius: 14px;
 }
