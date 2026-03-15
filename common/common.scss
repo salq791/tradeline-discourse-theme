@@ -388,30 +388,16 @@ a {
   border: 1px solid color-mix(in srgb, var(--tradeline-accent) 24%, transparent);
   border-radius: 14px;
   display: inline-flex;
-  gap: 3px;
   height: 2.5rem;
   justify-content: center;
-  padding: 0.45rem;
+  padding: 0.5rem;
   width: 2.5rem;
+}
 
-  span {
-    background: var(--tradeline-accent);
-    border-radius: 999px;
-    display: block;
-    width: 4px;
-  }
-
-  span:nth-child(1) {
-    height: 11px;
-  }
-
-  span:nth-child(2) {
-    height: 16px;
-  }
-
-  span:nth-child(3) {
-    height: 21px;
-  }
+.tradeline-mark svg {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 
 .tradeline-footer__brand-copy {
