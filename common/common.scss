@@ -118,8 +118,8 @@ a {
 }
 
 .tradeline-header-shell__action {
-  border: 1px solid transparent;
-  border-radius: var(--tradeline-radius);
+  border: 0;
+  border-radius: 0;
   color: var(--tradeline-text-muted);
   display: inline-flex;
   flex: 0 0 auto;
@@ -127,24 +127,21 @@ a {
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1;
-  padding: 0.62rem 0.72rem;
+  padding: 0.35rem 0.3rem;
   text-decoration: none;
   transition:
-    border-color 0.15s ease,
     background-color 0.15s ease,
     color 0.15s ease;
   white-space: nowrap;
 
   &:hover {
-    border-color: color-mix(in srgb, var(--tradeline-text) 12%, transparent);
     color: var(--tradeline-text);
     text-decoration: none;
   }
 }
 
 .tradeline-header-shell__action--ghost {
-  background: color-mix(in srgb, var(--tradeline-text) 3%, transparent);
-  border-color: color-mix(in srgb, var(--tradeline-text) 10%, transparent);
+  background: transparent;
 }
 .navigation-controls,
 .header-buttons,
