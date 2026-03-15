@@ -105,32 +105,18 @@ a {
 .tradeline-header-shell {
   align-items: center;
   display: flex;
-  flex: 1 1 auto;
-  gap: 0.75rem;
-  justify-content: space-between;
+  flex: 0 0 auto;
+  gap: 0.5rem;
+  justify-content: flex-end;
   margin-left: 0.85rem;
-  min-width: 0;
-  overflow: hidden;
 }
 
-.tradeline-header-shell__nav,
 .tradeline-header-shell__actions {
   align-items: center;
   display: flex;
   gap: 0.35rem;
 }
 
-.tradeline-header-shell__nav {
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.tradeline-header-shell__actions {
-  flex: 0 0 auto;
-}
-
-.tradeline-header-shell__link,
 .tradeline-header-shell__action {
   border: 1px solid transparent;
   border-radius: var(--tradeline-radius);
@@ -159,22 +145,6 @@ a {
 .tradeline-header-shell__action--ghost {
   background: color-mix(in srgb, var(--tradeline-text) 3%, transparent);
   border-color: color-mix(in srgb, var(--tradeline-text) 10%, transparent);
-}
-
-.tradeline-header-shell__action--primary {
-  align-items: center;
-  background: var(--tradeline-accent);
-  border-color: var(--tradeline-accent);
-  color: #fff;
-  font-weight: 600;
-  justify-content: center;
-  min-width: 4.75rem;
-
-  &:hover {
-    background: var(--tradeline-accent-hover);
-    border-color: var(--tradeline-accent-hover);
-    color: #fff;
-  }
 }
 .navigation-controls,
 .header-buttons,
@@ -545,8 +515,7 @@ a {
   }
 }
 @media (max-width: 1240px) {
-  .tradeline-header-shell__nav,
-  .tradeline-header-shell__action--ghost {
+  .tradeline-header-shell__action--ghost:last-child {
     display: none;
   }
 }
@@ -561,21 +530,12 @@ body.admin-interface .tradeline-header-shell {
   justify-content: flex-end;
 }
 
-body.admin-interface .tradeline-header-shell__nav,
-body.admin-interface .tradeline-header-shell__action--ghost {
-  display: none;
-}
-
 @media (max-width: 900px) {
   .tradeline-header-shell {
-    margin-left: 0.75rem;
+    margin-left: 0.5rem;
   }
 
-  .tradeline-header-shell__nav {
-    display: none;
-  }
-
-  .tradeline-header-shell__action--ghost {
+  .tradeline-header-shell__action--ghost:last-child {
     display: none;
   }
 
