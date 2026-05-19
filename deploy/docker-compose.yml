@@ -1,0 +1,99 @@
+name: tradeline-community
+
+services:
+  discourse:
+    image: bitnami/discourse:3.5.0
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      DISCOURSE_HOST: ${DISCOURSE_HOST:-community.tradelineconsulting.com}
+      DISCOURSE_SKIP_INSTALL: "no"
+      DISCOURSE_PORT_NUMBER: "3000"
+      DISCOURSE_USERNAME: ${DISCOURSE_USERNAME:-sal}
+      DISCOURSE_PASSWORD: ${DISCOURSE_PASSWORD}
+      DISCOURSE_EMAIL: ${DISCOURSE_EMAIL:-sal@tradelineconsulting.com}
+      DISCOURSE_FIRST_NAME: Sal
+      DISCOURSE_LAST_NAME: Qureshi
+      DISCOURSE_SITE_NAME: ${DISCOURSE_SITE_NAME:-Tradeline Community}
+      DISCOURSE_DATABASE_HOST: discourse-db
+      DISCOURSE_DATABASE_PORT_NUMBER: "5432"
+      DISCOURSE_DATABASE_NAME: discourse
+      DISCOURSE_DATABASE_USER: discourse
+      DISCOURSE_DATABASE_PASSWORD: ${DB_PASSWORD}
+      DISCOURSE_REDIS_HOST: discourse-redis
+      DISCOURSE_REDIS_PORT_NUMBER: "6379"
+      DISCOURSE_PRECOMPILE_ASSETS: "yes"
+      DISCOURSE_BEHIND_PROXY: "yes"
+      DISCOURSE_ENABLE_HTTPS: "yes"
+      DISCOURSE_EXTERNAL_HTTP_PORT_NUMBER: "80"
+      DISCOURSE_EXTERNAL_HTTPS_PORT_NUMBER: "443"
+      # SMTP via SES on netcup-friendly port 2587
+      DISCOURSE_SMTP_HOST: ${SMTP_HOST:-email-smtp.ca-central-1.amazonaws.com}
+      DISCOURSE_SMTP_PORT_NUMBER: ${SMTP_PORT:-2587}
+      DISCOURSE_SMTP_USER: ${SMTP_USER}
+      DISCOURSE_SMTP_PASSWORD: ${SMTP_PASSWORD}
+      DISCOURSE_SMTP_PROTOCOL: tls
+      DISCOURSE_SMTP_AUTH: login
+      DISCOURSE_NOTIFICATION_EMAIL: ${NOTIFICATION_EMAIL:-do-not-reply@tradelineconsulting.com}
+    depends_on:
+      discourse-db:
+        condition: service_healthy
+      discourse-redis:
+        condition: service_started
+    volumes:
+      - discourse-data:/bitnami/discourse
+
+  discourse-sidekiq:
+    image: bitnami/discourse:3.5.0
+    restart: unless-stopped
+    command: ["/opt/bitnami/scripts/discourse/run.sh", "--sidekiq"]
+    environment:
+      DISCOURSE_HOST: ${DISCOURSE_HOST:-community.tradelineconsulting.com}
+      DISCOURSE_DATABASE_HOST: discourse-db
+      DISCOURSE_DATABASE_PORT_NUMBER: "5432"
+      DISCOURSE_DATABASE_NAME: discourse
+      DISCOURSE_DATABASE_USER: discourse
+      DISCOURSE_DATABASE_PASSWORD: ${DB_PASSWORD}
+      DISCOURSE_REDIS_HOST: discourse-redis
+      DISCOURSE_REDIS_PORT_NUMBER: "6379"
+      DISCOURSE_SMTP_HOST: ${SMTP_HOST:-email-smtp.ca-central-1.amazonaws.com}
+      DISCOURSE_SMTP_PORT_NUMBER: ${SMTP_PORT:-2587}
+      DISCOURSE_SMTP_USER: ${SMTP_USER}
+      DISCOURSE_SMTP_PASSWORD: ${SMTP_PASSWORD}
+      DISCOURSE_SMTP_PROTOCOL: tls
+      DISCOURSE_SMTP_AUTH: login
+    depends_on:
+      discourse:
+        condition: service_started
+    volumes:
+      - discourse-data:/bitnami/discourse
+
+  discourse-db:
+    image: bitnami/postgresql:16
+    restart: unless-stopped
+    environment:
+      POSTGRESQL_USERNAME: discourse
+      POSTGRESQL_PASSWORD: ${DB_PASSWORD}
+      POSTGRESQL_DATABASE: discourse
+      POSTGRESQL_POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - discourse-db-data:/bitnami/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "PGPASSWORD=$$POSTGRESQL_PASSWORD pg_isready -U discourse"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  discourse-redis:
+    image: bitnami/redis:7.2
+    restart: unless-stopped
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - discourse-redis-data:/bitnami/redis/data
+
+volumes:
+  discourse-data:
+  discourse-db-data:
+  discourse-redis-data:
