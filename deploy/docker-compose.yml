@@ -70,7 +70,7 @@ services:
       - discourse-data:/bitnami/discourse
 
   discourse-db:
-    image: bitnami/postgresql:16
+    image: soldevelo/postgresql:16
     restart: unless-stopped
     environment:
       POSTGRESQL_USERNAME: discourse
